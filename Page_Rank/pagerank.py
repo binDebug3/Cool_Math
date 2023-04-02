@@ -1,19 +1,15 @@
-# solutions.py
-"""Volume 1: The Page Rank Algorithm.
-<Name> Dallin Stewart
-<Class> ACME 003
-<Date> 02/25/23
-"""
 import numpy as np
 import networkx as nx
 import itertools
 
-# Problems 1-2
+
+
 class DiGraph:
     """A class for representing directed graphs via their adjacency matrices.
     Attributes:
         (fill this out after completing DiGraph.__init__().)
     """
+
     # Problem 1
     def __init__(self, A, labels=None):
         """Modify A so that there are no sinks in the corresponding graph,
@@ -24,10 +20,12 @@ class DiGraph:
             labels (list(str)): labels for the n nodes in the graph.
                 If None, defaults to [0, 1, ..., n-1].
         """
+
         # check parameters
         n, m = A.shape
         if labels is None:
             labels = np.arange(n)
+
         if n != m or n != len(labels):
             raise ValueError("The number of labels is not equal to the number of nodes in the graph")
 
@@ -42,7 +40,7 @@ class DiGraph:
         self.labels = labels
         self.n = len(labels)
 
-    # Problem 2
+
     def linsolve(self, epsilon=0.85):
         """Compute the PageRank vector using the linear system method.
         Parameters:
@@ -51,6 +49,7 @@ class DiGraph:
         Returns:
             dict(str -> float): A dictionary mapping labels to PageRank values.
         """
+
         # compute the PageRank vector using the linear system method.
         altA = np.eye(self.n) - epsilon * self.A
         b = (1 - epsilon) / self.n * np.ones(self.n)
@@ -59,7 +58,7 @@ class DiGraph:
         # return dictionary mapping labels to vectors
         return {self.labels[i]: p[i] for i in range(self.n)}
 
-    # Problem 2
+
     def eigensolve(self, epsilon=0.85):
         """Compute the PageRank vector using the eigenvalue method.
         Normalize the resulting eigenvector so its entries sum to 1.
@@ -68,6 +67,7 @@ class DiGraph:
         Return:
             dict(str -> float): A dictionary mapping labels to PageRank values.
         """
+
         # compute B
         B = epsilon * self.A + (1 - epsilon) / self.n * np.ones((self.n, self.n))
 
@@ -78,10 +78,11 @@ class DiGraph:
         # return dictionary mapping labels to vectors
         return {self.labels[i]: p[i] for i in range(self.n)}
 
+    
     def _pNext(self, currP, ep):
         return ep * self.A @ currP + (1 - ep) / self.n * np.ones(self.n)
 
-    # Problem 2
+
     def itersolve(self, epsilon=0.85, maxiter=100, tol=1e-12):
         """Compute the PageRank vector using the iterative method.
         Parameters:
@@ -91,6 +92,7 @@ class DiGraph:
         Return:
             dict(str -> float): A dictionary mapping labels to PageRank values.
         """
+
         # compute initial values
         p0 = np.ones(self.n) / self.n
         p1 = self._pNext(p0, epsilon)
@@ -108,7 +110,7 @@ class DiGraph:
         return {self.labels[i]: p1[i] for i in range(self.n)}
 
 
-# Problem 3
+
 def get_ranks(d):
     """Construct a sorted list of labels based on the PageRank vector.
     Parameters:
@@ -116,6 +118,7 @@ def get_ranks(d):
     Returns:
         (list) the keys of d, sorted by PageRank value from greatest to least.
     """
+
     # create a list of types of keys and values
     pairs = [(label, pagerank) for label, pagerank in d.items()]
 
@@ -126,7 +129,7 @@ def get_ranks(d):
     return [label for label, pagerank in sorted_pairs]
 
 
-# Problem 4
+
 def rank_websites(filename="web_stanford.txt", epsilon=0.85):
     """Read the specified file and construct a graph where node j points to
     node i if webpage j has a hyperlink to webpage i. Use the DiGraph class
@@ -143,6 +146,7 @@ def rank_websites(filename="web_stanford.txt", epsilon=0.85):
     Returns:
         (list(str)): The ranked list of webpage IDs.
     """
+
     # read in data
     with open(filename, 'r') as name:
         data = name.read()
@@ -153,6 +157,7 @@ def rank_websites(filename="web_stanford.txt", epsilon=0.85):
     for line in data:
         for ids in line.split("/"):
             sites.add(ids)
+
     sites = list(sites)
     sites.sort()
     n = len(sites)
@@ -179,7 +184,7 @@ def rank_websites(filename="web_stanford.txt", epsilon=0.85):
     return indices
 
 
-# Problem 5
+
 def rank_ncaa_teams(filename, epsilon=0.85):
     """Read the specified file and construct a graph where node j points to
     node i with weight w if team j was defeated by team i in w games. Use the
@@ -194,6 +199,7 @@ def rank_ncaa_teams(filename, epsilon=0.85):
     Returns:
         (list(str)): The ranked list of team names.
     """
+
     # read in data
     with open(filename, 'r') as name:
         data = name.read()
@@ -223,7 +229,7 @@ def rank_ncaa_teams(filename, epsilon=0.85):
     return [i for i in indices]
 
 
-# Problem 6
+
 def rank_actors(filename="top250movies.txt", epsilon=0.85):
     """Read the specified file and construct a graph where node a points to
     node b with weight w if actor a and actor b were in w movies together but
@@ -234,6 +240,7 @@ def rank_actors(filename="top250movies.txt", epsilon=0.85):
     meaning actor2 and actor3 should each have an edge pointing to actor1,
     and actor3 should have an edge pointing to actor2.
     """
+
     # read in data
     with open(filename, 'r', encoding="utf-8") as file:
         data = file.read()
@@ -263,41 +270,3 @@ def rank_actors(filename="top250movies.txt", epsilon=0.85):
 
     # return sorted list
     return get_ranks(nx.pagerank(DG, alpha=epsilon))
-
-
-if __name__ == "__main__":
-    pass
-    # # test problem 1
-    # Atest = np.array([[0,0,0,0],
-    #                   [1,0,1,0],
-    #                   [1,0,0,1],
-    #                   [1,0,1,0]])
-    # result = DiGraph(Atest)
-    # print(result.A)
-    # print(result.labels)
-    # #
-    # # test problem 2
-    # print(result.linsolve())
-    # print(result.eigensolve())
-    # print(result.itersolve())
-
-    # # test problem 3
-    # print(get_ranks(result.itersolve()))
-
-    # # test problem 4
-    # print(rank_websites(epsilon=0.37))
-    # print(rank_websites(epsilon=0.73))
-    # print(rank_websites(epsilon=0.93))
-    # print(rank_websites(epsilon=0.38))
-    # print(rank_websites(epsilon=0.23))
-
-
-    # # test problem 5
-    # print(rank_ncaa_teams("ncaa2010.csv", 0.68))
-    # print(rank_ncaa_teams("ncaa2010.csv", 0.78))
-    # print(rank_ncaa_teams("ncaa2010.csv", 0.77))
-    # print(rank_ncaa_teams("ncaa2010.csv", 0.00))
-    # print(rank_ncaa_teams("ncaa2010.csv", 1.00))
-
-    # # test problem 6
-    # print(rank_actors(epsilon=0.7))

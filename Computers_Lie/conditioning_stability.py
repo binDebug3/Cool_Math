@@ -1,10 +1,3 @@
-# condition_stability.py
-"""Volume 1: Conditioning and Stability.
-<Name> Dallin Stewart
-<Class> ACME 002
-<Date> 01/30/23
-"""
-
 import numpy as np
 import sympy as sy
 from scipy import linalg as la
@@ -12,21 +5,8 @@ from numpy import linalg as npla
 from matplotlib import pyplot as plt
 
 
-# Problem 1
-def matrix_cond(A):
-    """Calculate the condition number of A with respect to the 2-norm."""
-    # get svd
-    u, s, vh = la.svd(A)
-    smallest = min(s)
 
-    # return the ratio of largest to smallest singular values
-    if smallest == 0:
-        return np.inf
-    return max(s) / smallest
-
-
-# Problem 2
-def prob2():
+def plot_perturbations():
     """Randomly perturb the coefficients of the Wilkinson polynomial by
     replacing each coefficient c_i with c_i*r_i, where r_i is drawn from a
     normal distribution centered at 1 with standard deviation 1e-10.
@@ -37,6 +17,7 @@ def prob2():
         (float) The average absolute condition number.
         (float) The average relative condition number.
     """
+
     # Get the exact Wilkinson polynomial coefficients using SymPy.
     x, i = sy.symbols('x i')
     w = sy.poly_from_expr(sy.product(x-i, (i, 1, 20)))[0]
@@ -83,6 +64,7 @@ def prob2():
     return mean_abs, mean_rel
 
 
+
 # Helper function
 def reorder_eigvals(orig_eigvals, pert_eigvals):
     """Reorder the perturbed eigenvalues to be as close to the original eigenvalues as possible.
@@ -103,7 +85,8 @@ def reorder_eigvals(orig_eigvals, pert_eigvals):
         dists[:,index[1]] = np.inf
     return pert_eigvals[sort_order]
 
-# Problem 3
+
+
 def eig_cond(A):
     """Approximate the condition numbers of the eigenvalue problem at A.
     Parameters:
@@ -112,6 +95,7 @@ def eig_cond(A):
         (float) The absolute condition number of the eigenvalue problem at A.
         (float) The relative condition number of the eigenvalue problem at A.
     """
+
     # construct perturbations
     reals = np.random.normal(0, 1e-10, A.shape)
     imags = np.random.normal(0, 1e-10, A.shape)
@@ -126,8 +110,9 @@ def eig_cond(A):
     k = npla.norm(A, ord=2) * kHat / npla.norm(L, ord=2)
     return kHat, k
 
-# Problem 4
-def prob4(domain=[-100, 100, -100, 100], res=50):
+
+
+def condition_number(domain=[-100, 100, -100, 100], res=50):
     """Create a grid [x_min, x_max] x [y_min, y_max] with the given resolution. For each
     entry (x,y) in the grid, find the relative condition number of the
     eigenvalue problem, using the matrix   [[1, x], [y, 1]]  as the input.
@@ -156,8 +141,8 @@ def prob4(domain=[-100, 100, -100, 100], res=50):
     plt.show()
 
 
-# Problem 5
-def prob5(n):
+
+def least_squares(n):
     """Approximate the data from "stability_data.npy" on the interval [0,1]
     with a least squares polynomial of degree n. Solve the least squares
     problem using the normal equation and the QR decomposition, then compare
@@ -169,6 +154,7 @@ def prob5(n):
         (float): The forward error using the normal equations.
         (float): The forward error using the QR decomposition.
     """
+
     # load data
     xk, yk = np.load("stability_data.npy").T
     A = np.vander(xk, n + 1)
@@ -195,13 +181,15 @@ def prob5(n):
     # return condition numbers
     return npla.norm(A@ls1 - yk), npla.norm(A@ls2 - yk)
 
-# Problem 6
-def prob6():
+
+
+def integral_error():
     """For n = 5, 10, ..., 50, compute the integral I(n) using SymPy (the
     true values) and the subfactorial formula (may or may not be correct).
     Plot the relative forward error of the subfactorial formula for each
-    value of n. Use a log scale for the y-axis.
+    value of n. 
     """
+
     # initialize local variables
     x = sy.symbols("x")
     error = []
@@ -226,27 +214,3 @@ def prob6():
     plt.title("Problem 6")
     plt.legend()
     plt.show()
-
-
-if __name__ == "__main__":
-    pass
-    # # test problem one
-    # B = np.random.rand(3,3)
-    # print(matrix_cond(B))
-    # print(np.linalg.cond(B))
-
-    # # test problem 2
-    # print(prob2())
-
-    # test problem 3
-    B = np.array([[5, 2], [3, 1]])
-    print(eig_cond(B))
-
-    # # test problem 4
-    # prob4(res=200)
-
-    # # test problem 5
-    # prob5(14)
-
-    # # test problem 6
-    # prob6()
