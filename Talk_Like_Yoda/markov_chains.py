@@ -6,9 +6,6 @@ import re
 
 class MarkovChain:
     """A Markov chain with finitely many states.
-
-    Attributes:
-        (fill this out)
     """
 
     def __init__(self, A, states=None):
@@ -145,14 +142,11 @@ class MarkovChain:
 
 class SentenceGenerator(MarkovChain):
     """A Markov-based simulator for natural language.
-    Attributes:
-        (fill this out)
     """
 
     def __init__(self, filename):
         """Read the specified file and build a transition matrix from its
-        contents. You may assume that the file has one complete sentence
-        written on each line.
+        contents. 
         """
 
         # read the file

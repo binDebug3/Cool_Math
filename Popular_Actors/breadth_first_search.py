@@ -265,7 +265,7 @@ class MovieGraph:
 
         return path, len(path) // 2
 
-    # Problem 6
+
     def average_number(self, target):
         """Calculate the shortest path lengths of every actor to the target
         (not including movies). Plot the distribution of path lengths and

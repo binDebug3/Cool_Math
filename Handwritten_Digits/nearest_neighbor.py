@@ -151,6 +151,7 @@ class KDT:
             ((k,) ndarray) the value in the tree that is nearest to z.
             (float) The Euclidean distance from the nearest neighbor to z.
         """
+
         def KDSearch(current, nearest, dStar):
             # base case
             if current is None:
@@ -165,7 +166,7 @@ class KDT:
                 nearest = current
                 dStar = la.norm(x - z)
             
-                # update nearest and d* recursively with the appropriate child
+            # update nearest and d* recursively with the appropriate child
             if z[i] < x[i]:
                 nearest, dStar = KDSearch(current.left, nearest, dStar)
                 if z[i] + dStar >= x[i]:
@@ -182,9 +183,9 @@ class KDT:
         node, dStar = KDSearch(self.root, self.root, la.norm(self.root.value - z))
         return node.value, dStar
 
+
     def __str__(self):
         """String representation: a hierarchical list of nodes and their axes.
-
         Example:                           'KDT(k=2)
                     [5,5]                   [5 5]   pivot = 0
                     /   \                   [3 2]   pivot = 1

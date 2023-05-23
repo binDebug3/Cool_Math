@@ -74,15 +74,16 @@ def reorder_eigvals(orig_eigvals, pert_eigvals):
     Returns:
         ((n,) ndarray) - the reordered eigenvalues of the perturbed matrix
     """
-    # I didn't write this code so don't doc me for comments pls
     n = len(pert_eigvals)
     sort_order = np.zeros(n).astype(int)
     dists = np.abs(orig_eigvals - pert_eigvals.reshape(-1,1))
+
     for _ in range(n):
         index = np.unravel_index(np.argmin(dists), dists.shape)
         sort_order[index[0]] = index[1]
         dists[index[0],:] = np.inf
         dists[:,index[1]] = np.inf
+
     return pert_eigvals[sort_order]
 
 
@@ -122,6 +123,7 @@ def condition_number(domain=[-100, 100, -100, 100], res=50):
         domain ([x_min, x_max, y_min, y_max]):
         res (int): number of points along each edge of the grid.
     """
+
     # set up meshgrid
     xGrid = np.linspace(domain[0], domain[1], res)
     yGrid = np.linspace(domain[2], domain[3], res)

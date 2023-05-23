@@ -10,7 +10,6 @@ class DiGraph:
         (fill this out after completing DiGraph.__init__().)
     """
 
-    # Problem 1
     def __init__(self, A, labels=None):
         """Modify A so that there are no sinks in the corresponding graph,
         then calculate Ahat. Save Ahat and the labels as attributes.
@@ -45,7 +44,6 @@ class DiGraph:
         """Compute the PageRank vector using the linear system method.
         Parameters:
             epsilon (float): the damping factor, between 0 and 1.
-
         Returns:
             dict(str -> float): A dictionary mapping labels to PageRank values.
         """

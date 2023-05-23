@@ -47,6 +47,7 @@ def connectivity(A, tol=1e-8):
     
     # count connectedness and find algebraic multiplicity
     for i in range(0, eigs.size):
+
         # check for tolerance and minimum eigenvalue
         if abs(eigs[i]) < tol:
             eigs[i] = 0
@@ -93,10 +94,8 @@ def get_neighbors(index, radius, height, width):
 class ImageSegmenter:
     """Class for storing and segmenting images."""
 
-    # Problem 3
     def __init__(self, filename):
-        """Read the image file. Store its brightness values as a flat array."""
-        """Write the constructor so that it accepts the name of an image file. 
+        """Accepts the name of an image file. 
         1. Read the image, 
         2. scale it so that it contains floats between 0 and 1, 
         3. then store it as an attribute. 
