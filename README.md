@@ -4,7 +4,7 @@
     <h1 align="center">Math is Cool, I Promise</h1>
     <p align="center">
         This is a collection of projects that I've worked on that use mathematical tools
-        to solve interesting problems in a variety of fields.
+        to solve interesting problems in a variety of fields by Dallin Stewart
     </p>
 </div>
 
