@@ -15,16 +15,10 @@
   <summary>Table of Contents</summary>
   <ol>
     <li><a href="#welcome">Welcome</a></li>
-    <li><a href="#sound">Analyzing Sound Waves</a></li>
-    <li><a href="#stability">How Your Computer Lies to You</a></li>
-    <li><a href="#recognition">Facial Recognition without Machine Learning</a></li>
-    <li><a href="#digits">Classifying Handwritten Digits without ML</a></li>
-    <li><a href="#compression">Image Compression</a></li>
-    <li><a href="#segmentation">Image Segmentation</a></li>
-    <li><a href="#optimization">How to Optimize Your Nutrition</a></li>
-    <li><a href="#ranking">Google's Page Rank Algorithm</a></li>
-    <li><a href="#recommender">Recommender System without Machine Learning</a></li>
-    <li><a href="#markov">How to Talk like Yoda</a></li>
+    <li><a href="#cs">Computer Vision and Image Analysis</a></li>
+    <li><a href="#ml">Machine Learning</a></li>
+    <li><a href="#optimiation">Optimization and Other Fun Algorithms</a></li>
+    <li><a href="#model">Predictive Modeling and Differential Equations</a></li>
   </ol>
 </details>
 
@@ -59,62 +53,51 @@ computation needed to solve the problems of the modern world.
 
 <hr>
 
-## Project Descriptions
+## Folder Descriptions
 
-### <a name="sound">Analyzing Sound Waves</a>
-This project uses convolution ad the Fast Fourier Transform to analyze sound waves and images. I used it to modify the 
-sound of a piano playing to make it sound like it is being played in a large concert hall. I also used it remove noise 
-from an image of a license plate so that critical information would be easier to read..
+### <a href="#cs">Computer Vision and Image Analysis</a>
+  <li>Analyzing Sound Waves</li>
+  <li>Seemlessly Inserting One Image into Another</li>
+  <li>Removing Noise and Blur from an Image</li>
+  <li>Enhancing a Noisy Image</li>
+  <li>Image Compression</li>
+  <li>Image Segmentation</li>
 
-### <a name="stability">How Your Computer Lies to You</a>
-This project uses theory from conditioning and stability of computer algorithms to show how your computer can lie to you.
-Because computers represent numbers in a finite number of bits, they have to approximate numbers with too many significant 
-digits, and can only represent numbers in a finite range. This means that when you perform a calculation on a computer, 
-the result may not be exactly what you expect.
 
-### <a name="recognition">Facial Recognition without Machine Learning</a>
-This project uses the Eigenfaces method to recognize faces without using machine learning. The Eigenfaces method involves 
-using the singular value decomposition to find the principal components of a set of images. The principal components are 
-the directions in which the images vary the most. It first computes the mean image, and then subtracts the mean from each 
-image to find the most salient features of each image. This allows the program to find the most similar images overall, 
-while only using linear algebra!
+### <a href="#ml">Machine Learning</a>
+  <li>Facial Recognition without Deep Learning</li>
+  <li>Classifying Handwritten Digits with Clustering</li>
+  <li>Learning to Filter Noisy Sensor Data</li>
+  <li>House Price Prediction with Linear Regression</li>
+  <li>Data Classification with Logistic Regression</li>
+  <li>Identifying Breast Cancer with PCA and Clustering</li>
+  <li>Detecting Spam with Naive Bayes</li>
+  <li>Speech Recognition like Siri with HMMs</li>
 
-### <a name="digits">Classifying Handwritten Digits without ML</a>
-This project uses the nearest neighbors method to classify handwritten digits without using machine learning. The nearest 
-neighbors method involves finding the k nearest neighbors to a point, and then classifying the point based on the class 
-of the nearest neighbors. In this project, I used it to classify handwritten digits. I used the MNIST dataset, which is a 
-dataset of 70,000 handwritten digits. I used the first 60,000 digits to train the model, and the last 10,000 digits to test 
-the model. I found that I could classify the digits with about 90% accuracy.
 
-### <a name="compression">Image Compression</a>
-This project uses the singular value decomposition to compress images. The singular value decomposition is a powerful 
-tool that can be used to find the principal components of a matrix. In this project, I used it to find the most important 
-elements of the eigenbasis of an image. I then used the eigenbasis to reconstruct the image, and found that I could 
-compress the image by 90% without losing much of the original information.
 
-### <a name="segmentation">Image Segmentation</a>
-This project uses the singular value decomposition to segment images.
+### <a href="#optimiation">Optimization and Other Fun Algorithms</a>
+  <li>How Your Computer Lies to You</li>
+  <li>Recommending Artists to Listeners with NMF</li>
+  <li>How to Optimize Your Nutrition with Simplex</li>
+  <li>Google's Page Rank Algorithm</li>
+  <li>Finding Popular Actors with Graph Searching</li>
+  <li>Recommender System without Machine Learning</li>
+  <li>How to Talk like Yoda</li>
+  <li>Solve Wordle with Entropy</li>
 
-### <a name="optimization">How to Optimize Your Nutrition</a>
-This projects uses the simplex method to optimize your nutrition. The simplex method is a powerful tool for solving 
-linear programming problems. It is used to find the optimal solution to a linear programming problem. In this project, 
-I used it to find the optimal combination of foods to eat to maximize the amount of nutrients you get while staying 
-within your daily calorie limit.
 
-### <a name="ranking">Google's Page Rank Algorithm</a>
-This project uses the Page Rank algorithm to rank web pages. The Page Rank algorithm is a powerful tool for ranking 
-a list of options using graph theory and adjacency matrices. In this project, I used it to ranks a small list of stanford's
-websites and to determine the best team to play in the first round of the NCAA tournament.
+### <a href="#model">Predictive Modeling and Differential Equations</a>
+  <li>Making Stock Predictions with ARMA Models</li>
+  <li>Modeling Chaos with Lorenz Equations</li>
+  <li>Understanding Entropy and Heat Flo</li>
+  <li>Finding the Optimal HIV Treatment with Control Theory</li>
+  <li>Balancing an Inverted Pendulum (aka walking)</li>
+  <li>Route Planning around Obstacles with Control Theory</li>
+  <li>Modeling Disease Spread with SIR Models</li>
+  <li>Maximizing Profit from Timber Harvesting</li>
+  
 
-### <a name="recommender">Recommender System without Machine Learning</a>
-This project uses non-negative matrix factorization to create a recommender system without using machine learning. The 
-non-negative matrix factorization is a powerful tool.
-
-### <a name="markov">How to Talk like Yoda</a>
-This project uses Markov chains to create a Markov chain that can generate text that sounds like Yoda. Markov chains are 
-a powerful tool for modeling random processes. In this project, I used it to model the way Yoda speaks. I used a dataset 
-of all of Yoda's lines from the Star Wars movies, and then used the Markov chain to generate new lines that sound like 
-Yoda.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
